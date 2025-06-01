@@ -13,5 +13,6 @@ data class Recipe(
     val instructions: String,
     val category: String,
     // val imageUrl: String,
-    @TypeConverters(Converters::class) val ingredients: List<String>
+    @TypeConverters(Converters::class) val ingredients: List<String>,
+    val isFavorite: Boolean = false
 )

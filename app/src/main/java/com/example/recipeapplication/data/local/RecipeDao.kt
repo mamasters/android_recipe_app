@@ -24,4 +24,6 @@ interface RecipeDao {
     @Query("DELETE FROM recipes")
     suspend fun deleteAll()
 
+    @Query("UPDATE recipes SET isFavorite = :isFavorite WHERE id = :id")
+    suspend fun updateFavoriteStatus(id: Int, isFavorite: Boolean)
 }

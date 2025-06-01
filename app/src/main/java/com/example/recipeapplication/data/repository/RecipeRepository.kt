@@ -16,4 +16,7 @@ class RecipeRepository @Inject constructor(private val recipeDao: RecipeDao) {
 
     suspend fun deleteAll() = recipeDao.deleteAll()
 
+    suspend fun toggleFavorite(recipe: Recipe) {
+        recipeDao.updateFavoriteStatus(recipe.id, !recipe.isFavorite)
+    }
 }

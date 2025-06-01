@@ -12,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.launch
 
+
 @HiltViewModel
 class RecipeViewModel @Inject constructor(
     private val repository: RecipeRepository
@@ -54,5 +55,29 @@ class RecipeViewModel @Inject constructor(
             repository.deleteAll()
             loadRecipes()
         }
+    }
+
+    fun toggleFavorite(recipe: Recipe) {
+        viewModelScope.launch {
+            repository.toggleFavorite(recipe)
+            loadRecipes()
+        }
+    }
+
+    var searchQuery by mutableStateOf("")
+        private set
+
+    val filteredRecipes: List<Recipe>
+        get() = if (searchQuery.isBlank()) {
+            recipes
+        } else {
+            recipes.filter {
+                it.title.contains(searchQuery, ignoreCase = true) ||
+                        it.author.contains(searchQuery, ignoreCase = true)
+            }
+        }
+
+    fun onSearchQueryChanged(newQuery: String) {
+        searchQuery = newQuery
     }
 }
