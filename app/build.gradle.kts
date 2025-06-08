@@ -24,7 +24,8 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.example.recipeapplication.HiltTestRunner"
+
     }
 
     buildTypes {
@@ -81,5 +82,9 @@ dependencies {
     implementation(libs.compose.runtime)
     implementation(libs.activity.compose)
     implementation(libs.hilt.navigation.compose)
+
+    // Dagger Hilt Testing Dependencies
+    androidTestImplementation(libs.hilt.android.testing)
+    kspAndroidTest(libs.hilt.compiler)
 
 }
